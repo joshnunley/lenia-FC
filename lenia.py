@@ -1,4 +1,4 @@
-from scipy import ndimage
+from scipy import signal
 import numpy as np
 
 
@@ -12,7 +12,7 @@ class Lenia:
         self.growth_std = growth_std
 
     def update(self):
-        convolved_world = ndimage.convolve(self.world, self.kernel, mode="constant")
+        convolved_world = signal.convolve(self.world, self.kernel, mode="same")
         self.world = self._clip(
             self.world + self.time_step * self._growth(convolved_world)
         )
